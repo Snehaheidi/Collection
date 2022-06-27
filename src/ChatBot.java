@@ -92,7 +92,7 @@ public class ChatBot
                     break;
             }
         } else if (level == 3) {
-            System.out.println("Your Option set Sucessfully");
+            System.out.println("Your Option set Successfully");
             System.out.println("9-Back");
             System.out.println("0-Exit");
         }
