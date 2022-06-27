@@ -1,995 +1,233 @@
 import java.util.*;
 public class ChatBot
 {
-    static Stack<String> chatbot=new Stack<>();
-    public static void main(String[] args)
-    {
-        Language lang=new Language();
-        lang.selectLanguage();
-    }
-}
-class Language
-{
-    Scanner sc=new Scanner(System.in);
-    void selectLanguage()
-    {
-        System.out.println("Select your Language\n1.Tamil\n2.English\n3.Hindi\n0.Exit");
-        int language=sc.nextInt();
-        switch (language) {
-            case 1 -> {
-                ChatBot.chatbot.push("Tamil");
-                Tamil tamil = new Tamil();
-                tamil.selectTamil();
-            }
-            case 2 -> {
-                ChatBot.chatbot.push("English");
-                English english = new English();
-                english.selectEnglish();
-            }
-            case 3 -> {
-                ChatBot.chatbot.push("Hindi");
-                Hindi hindi=new Hindi();
-                hindi.selectHindi();
-            }
-            case 0 -> {
-                System.exit(0);
-            }
-        }
-    }
-}
-class Tamil
-{
-    Scanner sc=new Scanner(System.in);
-    Language lang = new Language();
-    void selectTamil()
-    {
-        System.out.println("என்டர் யுவர் ஆப்ச்சென்:\n1.ரீசார்ஜ்\n2.காலர் டியூன்\n3.டிடீஹச்\n4.நியூ ஆஃபர்\n9.பின் செல்ல\n0.வெளியே செல்ல");
-        int option=sc.nextInt();
-        switch (option) {
-            case 1 -> {
-                ChatBot.chatbot.push("Recharge");
-                Recharge recharge = new Recharge();
-                recharge.selectoffer();
-            }
-            case 2 -> {
-                ChatBot.chatbot.push("Caller_Tune");
-                CallerTune caller_tune = new CallerTune();
-                caller_tune.selectoffer();
-            }
-            case 3 -> {
-                ChatBot.chatbot.push("DTH");
-                DTH dth = new DTH();
-                dth.selectoffer();
-            }
-            case 4 -> {
-                ChatBot.chatbot.push("New_Offer");
-                NewOffer new_offer = new NewOffer();
-                new_offer.selectoffer();
-            }
-            case 9 -> {
-                ChatBot.chatbot.pop();
-                lang.selectLanguage();
-            }
-            case 0 -> System.exit(0);
-        }
-    }
-}
-class Recharge
-{
-    Scanner sc=new Scanner(System.in);
-    Tamil tamil=new Tamil();
-    void selectoffer()
-    {
-        System.out.println("என்டர் யுவர் ஆப்ச்சென்:\n1.179:2GB+1GB/Day+UL,28 days\n2.50TT,28 days\n3.399:1.5GB/Day+UL,56 days");
-        System.out.println("4.239:1.5GB/Day+UL,28 days\n9.பின் செல்ல\n0.வெளியே செல்ல");
-        int option=sc.nextInt();
-        switch (option) {
-            case 1 -> {
-                ChatBot.chatbot.push("179:2GB+1GB/Day+UL,28 days");
-                System.out.println("வெற்றிகரமாக ரீசார்ஜ் செய்யபட்டுள்ளது");
-                System.out.println("என்டர் யுவர் ஆப்ச்சென்:\n9.பின் செல்ல\n0.வெளியே செல்ல");
-                int opt=sc.nextInt();
-                if(opt==9) {
-                    ChatBot.chatbot.pop();
-                    tamil.selectTamil();
+    static Stack<SelectedOptions> backStack = new Stack<SelectedOptions>();
+    public static void main(String args[]) {
+        int choice;
+        backStack.push(new SelectedOptions(0, 0));
+        print(0, 0);
+        do {
+            Scanner input = new Scanner(System.in);
+            System.out.println();
+            System.out.println("Enter your option : ");
+            choice = input.nextInt();
+            if (choice == 9) {
+                backStack.pop();
+
+                if (backStack.isEmpty()) {
+                    break;
                 }
-                else
-                {
-                    System.exit(0);
-                }
+            } else {
+                backStack.push(new SelectedOptions(backStack.peek().level + 1, choice));
+
             }
-            case 2 ->
-                    {
-                        ChatBot.chatbot.push("50TT,28 days");
-                        System.out.println("வெற்றிகரமாக ரீசார்ஜ் செய்யபட்டுள்ளது");
-                        System.out.println("என்டர் யுவர் ஆப்ச்சென்:\n9.பின் செல்ல\n0.வெளியே செல்ல");
-                        int opt=sc.nextInt();
-                        if(opt==9) {
-                            ChatBot.chatbot.pop();
-                            tamil.selectTamil();
-                        }
-                        else
-                        {
-                            System.exit(0);
-                        }
-                    }
-            case 3 ->
-                    {
-                        ChatBot.chatbot.push("399:1.5GB/Day+UL,56 days");
-                        System.out.println("வெற்றிகரமாக ரீசார்ஜ் செய்யபட்டுள்ளது");
-                        System.out.println("என்டர் யுவர் ஆப்ச்சென்:\n9.பின் செல்ல\n0.வெளியே செல்ல");
-                        int opt=sc.nextInt();
-                        if(opt==9) {
-                            ChatBot.chatbot.pop();
-                            tamil.selectTamil();
-                        }
-                        else
-                        {
-                            System.exit(0);
-                        }
-                    }
-            case 4 ->
-                    {
-                        ChatBot.chatbot.push("239:1.5GB/Day+UL,28 days");
-                        System.out.println("வெற்றிகரமாக ரீசார்ஜ் செய்யபட்டுள்ளது");
-                        System.out.println("என்டர் யுவர் ஆப்ச்சென்:\n9.பின் செல்ல\n0.வெளியே செல்ல");
-                        int opt=sc.nextInt();
-                        if(opt==9) {
-                            ChatBot.chatbot.pop();
-                            tamil.selectTamil();
-                        }
-                        else
-                        {
-                            System.exit(0);
-                        }
-                    }
-            case 9 -> {
-                ChatBot.chatbot.pop();
-                tamil.selectTamil();
-            }
-            case 0 -> System.exit(0);
+            SelectedOptions top = backStack.peek();
+            print(top.level, top.choice);
+
+        } while (choice != 0);
+        System.out.println("Thank you for visiting our website...");
+    }
+    private static void print(int level, int choice) {
+
+        for (String choiceString : getChoices(level, choice)) {
+            System.out.println(choiceString);
         }
     }
-}
-class CallerTune
-{
-    Scanner sc=new Scanner(System.in);
-    Tamil tamil=new Tamil();
-    void selectoffer()
-    {
-        System.out.println("என்டர் யுவர் ஆப்ச்சென்:\n1.சிரிக்காதே சிரிக்காதே(ரெமோ)\n2.கண் இரண்டில் மோதி(உத்தம புத்திரன்)");
-        System.out.println("3.யாரோ என் நெஞ்சை(குட்டி)\n4.செல்லம்மா செல்லம்மா(டாக்டர்)\n9.பின் செல்ல\n0.வெளியே செல்ல");
-        int option=sc.nextInt();
-        switch (option) {
-            case 1 ->
-                    {
-                        ChatBot.chatbot.push("சிரிக்காதே சிரிக்காதே(ரெமோ)");
-                        System.out.println("காலர் டியூன் உறுதிசெய்யப்பட்டது");
-                        System.out.println("என்டர் யுவர் ஆப்ச்சென்:\n9.பின் செல்ல\n0.வெளியே செல்ல");
-                        int opt=sc.nextInt();
-                        if(opt==9) {
-                            ChatBot.chatbot.pop();
-                            tamil.selectTamil();
-                        }
-                        else
-                        {
-                            System.exit(0);
-                        }
-                    }
-            case 2 ->
-                    {
-                        ChatBot.chatbot.push("கண் இரண்டில் மோதி(உத்தம புத்திரன்)");
-                        System.out.println("காலர் டியூன் உறுதிசெய்யப்பட்டது");
-                        System.out.println("என்டர் யுவர் ஆப்ச்சென்:\n9.பின் செல்ல\n0.வெளியே செல்ல");
-                        int opt=sc.nextInt();
-                        if(opt==9) {
-                            ChatBot.chatbot.pop();
-                            tamil.selectTamil();
-                        }
-                        else
-                        {
-                            System.exit(0);
-                        }
-                    }
-            case 3 ->
-                    {
-                        ChatBot.chatbot.push("யாரோ என் நெஞ்சை(குட்டி)");
-                        System.out.println("காலர் டியூன் உறுதிசெய்யப்பட்டது");
-                        System.out.println("என்டர் யுவர் ஆப்ச்சென்:\n9.பின் செல்ல\n0.வெளியே செல்ல");
-                        int opt=sc.nextInt();
-                        if(opt==9) {
-                            ChatBot.chatbot.pop();
-                            tamil.selectTamil();
-                        }
-                        else
-                        {
-                            System.exit(0);
-                        }
-                    }
-            case 4 ->
-                    {
-                        ChatBot.chatbot.push("செல்லம்மா செல்லம்மா(டாக்டர்)");
-                        System.out.println("காலர் டியூன் உறுதிசெய்யப்பட்டது");
-                        System.out.println("என்டர் யுவர் ஆப்ச்சென்:\n9.பின் செல்ல\n0.வெளியே செல்ல");
-                        int opt=sc.nextInt();
-                        if(opt==9) {
-                            ChatBot.chatbot.pop();
-                            tamil.selectTamil();
-                        }
-                        else
-                        {
-                            System.exit(0);
-                        }
-                    }
-            case 9 -> {
-                ChatBot.chatbot.pop();
-                tamil.selectTamil();
+    static ArrayList<String> getChoices(int level, int choice) {
+        ArrayList<String> choiceList = new ArrayList();
+        if (level == 0) {
+            choiceList.add(Level1.OPTION_1.toString());
+            choiceList.add(Level1.OPTION_2.toString());
+            choiceList.add(Level1.OPTION_3.toString());
+            choiceList.add(Level1.OPTION_4.toString());
+            choiceList.add(Level1.OPTION_5.toString());
+        } else if (level == 1) {
+
+            switch (choice) {
+                case 1:
+                    choiceList.add(Level2.OPTION_1.toString());
+                    choiceList.add(Level2.OPTION_2.toString());
+                    choiceList.add(Level2.OPTION_3.toString());
+                    choiceList.add(Level2.OPTION_4.toString());
+                    choiceList.add(Level2.OPTION_5.toString());
+                    choiceList.add(Level2.OPTION_6.toString());
+                    break;
+                case 2:
+                    choiceList.add(Level3.OPTION_1.toString());
+                    choiceList.add(Level3.OPTION_2.toString());
+                    choiceList.add(Level3.OPTION_3.toString());
+                    choiceList.add(Level3.OPTION_4.toString());
+                    break;
             }
-            case 0 -> System.exit(0);
+        } else if (level == 2) {
+            switch (choice) {
+                case 1:
+                    choiceList.add(Recharge.OPTION_1.toString());
+                    choiceList.add(Recharge.OPTION_2.toString());
+                    choiceList.add(Recharge.OPTION_3.toString());
+                    choiceList.add(Recharge.OPTION_4.toString());
+                    break;
+                case 2:
+                    choiceList.add(Caller_Tune.OPTION_1.toString());
+                    choiceList.add(Caller_Tune.OPTION_2.toString());
+                    choiceList.add(Caller_Tune.OPTION_3.toString());
+                    choiceList.add(Caller_Tune.OPTION_4.toString());
+                    choiceList.add(Caller_Tune.OPTION_5.toString());
+                    choiceList.add(Caller_Tune.OPTION_6.toString());
+                    break;
+                case 3:
+                    choiceList.add(Dth.OPTION_1.toString());
+                    choiceList.add(Dth.OPTION_2.toString());
+                    choiceList.add(Dth.OPTION_3.toString());
+                    choiceList.add(Dth.OPTION_4.toString());
+                    choiceList.add(Dth.OPTION_5.toString());
+                    break;
+                case 4:
+                    choiceList.add(NewOffers.OPTION_1.toString());
+                    choiceList.add(NewOffers.OPTION_2.toString());
+                    choiceList.add(NewOffers.OPTION_3.toString());
+                    choiceList.add(NewOffers.OPTION_4.toString());
+                    choiceList.add(NewOffers.OPTION_5.toString());
+                    choiceList.add(NewOffers.OPTION_6.toString());
+                    break;
+            }
+        } else if (level == 3) {
+            System.out.println("Your Option set Sucessfully");
+            System.out.println("9-Back");
+            System.out.println("0-Exit");
+        }
+
+        return choiceList;
+    }
+
+    static class SelectedOptions {
+        private int level;
+        private int choice;
+
+        SelectedOptions(int level, int choice) {
+            this.level = level;
+            this.choice = choice;
+        }
+
+        public int getLevel() {
+            return level;
+        }
+
+        public void setLevel(int level) {
+            this.level = level;
+        }
+
+        public int getChoice() {
+            return choice;
+        }
+
+        public void setChoice(int choice) {
+            this.choice = choice;
+        }
+
+    }
+
+    public enum Level1 {
+        OPTION_1("1.English"), OPTION_2("2.Tamil"), OPTION_3("3.Hindi"), OPTION_4("4.Telugu"), OPTION_5("0-Exit");
+
+        private final String text;
+
+        Level1(final String text) {
+            this.text = text;
+        }
+
+        public String toString() {
+            return text;
         }
     }
-}
-class DTH
-{
-    Scanner sc=new Scanner(System.in);
-    Tamil tamil=new Tamil();
-    void selectoffer()
-    {
-        System.out.println("என்டர் யுவர் ஆப்ச்சென்:\n1.200/Month,தமிழ் சேனல் மட்டுமே\n2.500/Month,அனைத்து சேனல்களும்");
-        System.out.println("3.100/Month,பாட்டு சேனல் மட்டுமே\n4.250/Month,தமிழ் மற்றும் இங்கிலிஷ் சேனல் மட்டுமே\n9.பின் செல்ல\n0.வெளியே செல்ல");
-        int option=sc.nextInt();
-        switch (option) {
-            case 1 ->
-                    {
-                        ChatBot.chatbot.push("200/Month,தமிழ் சேனல் மட்டுமே");
-                        System.out.println("வெற்றிகரமாக ரீசார்ஜ் செய்யபட்டுள்ளது");
-                        System.out.println("என்டர் யுவர் ஆப்ச்சென்:\n9.பின் செல்ல\n0.வெளியே செல்ல");
-                        int opt=sc.nextInt();
-                        if(opt==9) {
-                            ChatBot.chatbot.pop();
-                            tamil.selectTamil();
-                        }
-                        else
-                        {
-                            System.exit(0);
-                        }
-                    }
-            case 2 ->
-                    {
-                        ChatBot.chatbot.push("500/Month,அனைத்து சேனல்களும்");
-                        System.out.println("வெற்றிகரமாக ரீசார்ஜ் செய்யபட்டுள்ளது");
-                        System.out.println("என்டர் யுவர் ஆப்ச்சென்:\n9.பின் செல்ல\n0.வெளியே செல்ல");
-                        int opt=sc.nextInt();
-                        if(opt==9) {
-                            ChatBot.chatbot.pop();
-                            tamil.selectTamil();
-                        }
-                        else
-                        {
-                            System.exit(0);
-                        }
-                    }
-            case 3 ->
-                    {
-                        ChatBot.chatbot.push("100/Month,பாட்டு சேனல் மட்டுமே");
-                        System.out.println("வெற்றிகரமாக ரீசார்ஜ் செய்யபட்டுள்ளது");
-                        System.out.println("என்டர் யுவர் ஆப்ச்சென்:\n9.பின் செல்ல\n0.வெளியே செல்ல");
-                        int opt=sc.nextInt();
-                        if(opt==9) {
-                            ChatBot.chatbot.pop();
-                            tamil.selectTamil();
-                        }
-                        else
-                        {
-                            System.exit(0);
-                        }
-                    }
-            case 4 ->
-                    {
-                        ChatBot.chatbot.push("250/Month,தமிழ் மற்றும் இங்கிலிஷ் சேனல் மட்டுமே");
-                        System.out.println("வெற்றிகரமாக ரீசார்ஜ் செய்யபட்டுள்ளது");
-                        System.out.println("என்டர் யுவர் ஆப்ச்சென்:\n9.பின் செல்ல\n0.வெளியே செல்ல");
-                        int opt=sc.nextInt();
-                        if(opt==9) {
-                            ChatBot.chatbot.pop();
-                            tamil.selectTamil();
-                        }
-                        else
-                        {
-                            System.exit(0);
-                        }
-                    }
-            case 9 -> {
-                ChatBot.chatbot.pop();
-                tamil.selectTamil();
-            }
-            case 0 -> System.exit(0);
+
+    public enum Level2 {
+        OPTION_1("1.Rechare"), OPTION_2("2.Caller_Tune"), OPTION_3("3.DTH"), OPTION_4("4.New Offers"),
+        OPTION_5("9-Back"), OPTION_6("0.Exit");
+
+        private final String text;
+
+        Level2(final String text) {
+            this.text = text;
+        }
+
+        public String toString() {
+            return text;
         }
     }
-}
-class NewOffer
-{
-    Scanner sc=new Scanner(System.in);
-    Tamil tamil=new Tamil();
-    void selectoffer()
-    {
-        System.out.println("என்டர் யுவர் ஆப்ச்சென்:\n1.1000: UL இன்டெர் நேஷனல் கால்ஸ்,5 days \n2.1700: UL இன்டெர் நேஷனல் கால்ஸ்,15 days");
-        System.out.println("9.பின் செல்ல\n0.வெளியே செல்ல");
-        int book=sc.nextInt();
-        switch (book) {
-            case 1 ->
-                    {
-                        ChatBot.chatbot.push("1000: UL இன்டெர் நேஷனல் கால்ஸ்,5 days");
-                        System.out.println("வெற்றிகரமாக ரீசார்ஜ் செய்யபட்டுள்ளது");
-                        System.out.println("என்டர் யுவர் ஆப்ச்சென்:\n9.பின் செல்ல\n0.வெளியே செல்ல");
-                        int opt=sc.nextInt();
-                        if(opt==9) {
-                            ChatBot.chatbot.pop();
-                            tamil.selectTamil();
-                        }
-                        else
-                        {
-                            System.exit(0);
-                        }
-                    }
-            case 2 ->
-                    {
-                        ChatBot.chatbot.push("1700: UL இன்டெர் நேஷனல் கால்ஸ்,15 days");
-                        System.out.println("வெற்றிகரமாக ரீசார்ஜ் செய்யபட்டுள்ளது");
-                        System.out.println("என்டர் யுவர் ஆப்ச்சென்:\n9.பின் செல்ல\n0.வெளியே செல்ல");
-                        int opt=sc.nextInt();
-                        if(opt==9) {
-                            ChatBot.chatbot.pop();
-                            tamil.selectTamil();
-                        }
-                        else
-                        {
-                            System.exit(0);
-                        }
-                    }
-            case 9 -> {
-                ChatBot.chatbot.pop();
-                tamil.selectTamil();
-            }
-            case 0 -> System.exit(0);
+
+    public enum Level3 {
+        OPTION_1("1.ரீஜார்ச்"), OPTION_2("2.காலர் டியுன்"), OPTION_3("3.டிடிஎச்"), OPTION_4("4.புதிய ஆஃபர்");
+
+        private final String text;
+
+        Level3(final String text) {
+            this.text = text;
+        }
+
+        public String toString() {
+            return text;
         }
     }
-}
-class English
-{
-    Scanner sc=new Scanner(System.in);
-    Language lang=new Language();
-    void selectEnglish()
-    {
-        System.out.println("Enter Your Option:\n1.Recharge\n2.Caller Tune\n3.DTH\n4.New Offer\n9.Back\n0.Exit");
-        int option=sc.nextInt();
-        switch (option) {
-            case 1 -> {
-                ChatBot.chatbot.push("Recharge");
-                RechargeEnglish re = new RechargeEnglish();
-                re.selectoffer();
-            }
-            case 2 -> {
-                ChatBot.chatbot.push("Caller_Tune");
-                CallerTuneEnglish cte=new CallerTuneEnglish();
-                cte.selectoffer();
-            }
-            case 3 -> {
-                ChatBot.chatbot.push("DTH");
-                DTHEnglish dthe=new DTHEnglish();
-                dthe.selectoffer();
-            }
-            case 4 -> {
-                ChatBot.chatbot.push("New_Offer");
-                NewOfferEnglish noe=new NewOfferEnglish();
-                noe.selectoffer();
-            }
-            case 9 -> {
-                ChatBot.chatbot.pop();
-                lang.selectLanguage();
-            }
-            case 0 -> System.exit(0);
+
+    public enum Recharge {
+        OPTION_1("1.Rechare through Airtel Payments Bank Account"), OPTION_2("2.Coupon Recharge"), OPTION_3("9.Back"),
+        OPTION_4("0.Exit");
+
+        private final String text;
+
+        Recharge(final String text) {
+            this.text = text;
+        }
+
+        public String toString() {
+            return text;
         }
     }
-}
-class RechargeEnglish
-{
-    Scanner sc=new Scanner(System.in);
-    English english=new English();
-    void selectoffer()
-    {
-        System.out.println("Enter Your Option:\n1.179:2GB+1GB/Day+UL,28 days\n2.50TT,28 days\n3.399:1.5GB/Day+UL,56 days");
-        System.out.println("4.239:1.5GB/Day+UL,28 days\n9.Back\n0.Exit");
-        int option=sc.nextInt();
-        switch (option) {
-            case 1 ->
-                    {
-                        ChatBot.chatbot.push("179:2GB+1GB/Day+UL,28 days");
-                        System.out.println("Recharged Successfully");
-                        System.out.println("Enter Your Option:\n9.Back\n0.Exit");
-                        int opt=sc.nextInt();
-                        if(opt==9) {
-                            ChatBot.chatbot.pop();
-                            english.selectEnglish();
-                        }
-                        else
-                        {
-                            System.exit(0);
-                        }
-                    }
-            case 2 ->
-                    {
-                        ChatBot.chatbot.push("50TT,28 days");
-                        System.out.println("Recharged Successfully");
-                        System.out.println("Enter Your Option:\n9.Back\n0.Exit");
-                        int opt=sc.nextInt();
-                        if(opt==9) {
-                            ChatBot.chatbot.pop();
-                            english.selectEnglish();
-                        }
-                        else
-                        {
-                            System.exit(0);
-                        }
-                    }
-            case 3 ->
-                    {
-                        ChatBot.chatbot.push("399:1.5GB/Day+UL,56 days");
-                        System.out.println("Recharged Successfully");
-                        System.out.println("Enter Your Option:\n9.Back\n0.Exit");
-                        int opt=sc.nextInt();
-                        if(opt==9) {
-                            ChatBot.chatbot.pop();
-                            english.selectEnglish();
-                        }
-                        else
-                        {
-                            System.exit(0);
-                        }
-                    }
-            case 4 ->
-                    {
-                        ChatBot.chatbot.push("239:1.5GB/Day+UL,28 days");
-                        System.out.println("Recharged Successfully");
-                        System.out.println("Enter Your Option:\n9.Back\n0.Exit");
-                        int opt=sc.nextInt();
-                        if(opt==9) {
-                            ChatBot.chatbot.pop();
-                            english.selectEnglish();
-                        }
-                        else
-                        {
-                            System.exit(0);
-                        }
-                    }
-            case 9 -> {
-                ChatBot.chatbot.pop();
-                english.selectEnglish();
-            }
-            case 0 -> System.exit(0);
+
+    public enum Caller_Tune {
+        OPTION_1("1.Arabic Kuthu"), OPTION_2("2.Mudhal Nee Mudivu Nee"), OPTION_3("3.Naaga Vera Maari"),
+        OPTION_4("4.Two Two Two"), OPTION_5("9.Back"), OPTION_6("0-Exit");
+
+        private final String text;
+
+        Caller_Tune(final String text) {
+            this.text = text;
+        }
+
+        public String toString() {
+            return text;
         }
     }
-}
-class CallerTuneEnglish
-{
-    Scanner sc=new Scanner(System.in);
-    English english=new English();
-    void selectoffer()
-    {
-        System.out.println("Enter Your Option:\n1.Sirikathae Sirikathae(Remo)\n2.Kannirandil(Uthama puthiran)");
-        System.out.println("3.Yaaro En Nenjai(Kutty)\n4.Chellamma Chellamma(Doctor)\n9.Back\n0.Exit");
-        int option=sc.nextInt();
-        switch (option) {
-            case 1 ->
-                    {
-                        ChatBot.chatbot.push("Sirikathae Sirikathae(Remo)");
-                        System.out.println("Caller Tune added Successfully");
-                        System.out.println("Enter Your Option:\n9.Back\n0.Exit");
-                        int opt=sc.nextInt();
-                        if(opt==9) {
-                            ChatBot.chatbot.pop();
-                            english.selectEnglish();
-                        }
-                        else
-                        {
-                            System.exit(0);
-                        }
-                    }
-            case 2 ->
-                    {
-                        ChatBot.chatbot.push("Kannirandil(Uthama puthiran)");
-                        System.out.println("Caller Tune added Successfully");
-                        System.out.println("Enter Your Option:\n9.Back\n0.Exit");
-                        int opt=sc.nextInt();
-                        if(opt==9) {
-                            ChatBot.chatbot.pop();
-                            english.selectEnglish();
-                        }
-                        else
-                        {
-                            System.exit(0);
-                        }
-                    }
-            case 3 ->
-                    {
-                        ChatBot.chatbot.push("Yaaro En Nenjai(Kutty)");
-                        System.out.println("Caller Tune added Successfully");
-                        System.out.println("Enter Your Option:\n9.Back\n0.Exit");
-                        int opt=sc.nextInt();
-                        if(opt==9) {
-                            ChatBot.chatbot.pop();
-                            english.selectEnglish();
-                        }
-                        else
-                        {
-                            System.exit(0);
-                        }
-                    }
-            case 4 ->
-                    {
-                        ChatBot.chatbot.push("Chellamma Chellamma(Doctor)");
-                        System.out.println("Caller Tune added Successfully");
-                        System.out.println("Enter Your Option:\n9.Back\n0.Exit");
-                        int opt=sc.nextInt();
-                        if(opt==9) {
-                            ChatBot.chatbot.pop();
-                            english.selectEnglish();
-                        }
-                        else
-                        {
-                            System.exit(0);
-                        }
-                    }
-            case 9 -> {
-                ChatBot.chatbot.pop();
-                english.selectEnglish();
-            }
-            case 0 -> System.exit(0);
+
+    public enum Dth {
+        OPTION_1("1.Airtel DTH HD Plan Rs.251=49Channels+30D"), OPTION_2("2.Airtel DTH ₹ 285 Pack = 68 Channels+30D"),
+        OPTION_3("3.Airtel DTH ₹ 252 Pack = 78 Channels+30D"), OPTION_4("9.Back"), OPTION_5("9.Exit"),;
+
+        private final String text;
+
+        Dth(final String text) {
+            this.text = text;
+        }
+
+        public String toString() {
+            return text;
         }
     }
-}
-class DTHEnglish
-{
-    Scanner sc=new Scanner(System.in);
-    English english=new English();
-    void selectoffer()
-    {
-        System.out.println("Enter Your Option:\n1.200/Month,Only Tamil Channels\n2.500/Month,All Channels");
-        System.out.println("3.100/Month,Only Music Channel\n4.250/Month,Tamil and English Channels\n9.Back\n0.Exit");
-        int option=sc.nextInt();
-        switch (option) {
-            case 1 ->
-                    {
-                        ChatBot.chatbot.push("200/Month,Only Tamil Channels");
-                        System.out.println("Recharged Successfully");
-                        System.out.println("Enter Your Option:\n9.Back\n0.Exit");
-                        int opt=sc.nextInt();
-                        if(opt==9) {
-                            ChatBot.chatbot.pop();
-                            english.selectEnglish();
-                        }
-                        else
-                        {
-                            System.exit(0);
-                        }
-                    }
-            case 2 ->
-                    {
-                        ChatBot.chatbot.push("500/Month,All Channels");
-                        System.out.println("Recharged Successfully");
-                        System.out.println("Enter Your Option:\n9.Back\n0.Exit");
-                        int opt=sc.nextInt();
-                        if(opt==9) {
-                            ChatBot.chatbot.pop();
-                            english.selectEnglish();
-                        }
-                        else
-                        {
-                            System.exit(0);
-                        }
-                    }
-            case 3 ->
-                    {
-                        ChatBot.chatbot.push("100/Month,Only Music Channel");
-                        System.out.println("Recharged Successfully");
-                        System.out.println("Enter Your Option:\n9.Back\n0.Exit");
-                        int opt=sc.nextInt();
-                        if(opt==9) {
-                            ChatBot.chatbot.pop();
-                            english.selectEnglish();
-                        }
-                        else
-                        {
-                            System.exit(0);
-                        }
-                    }
-            case 4 ->
-                    {
-                        ChatBot.chatbot.push("250/Month,Tamil and English Channels");
-                        System.out.println("Recharged Successfully");
-                        System.out.println("Enter Your Option:\n9.Back\n0.Exit");
-                        int opt=sc.nextInt();
-                        if(opt==9) {
-                            ChatBot.chatbot.pop();
-                            english.selectEnglish();
-                        }
-                        else
-                        {
-                            System.exit(0);
-                        }
-                    }
-            case 9 -> {
-                ChatBot.chatbot.pop();
-                english.selectEnglish();
-            }
-            case 0 -> System.exit(0);
+
+    public enum NewOffers {
+        OPTION_1("1.265=UL call+1GB/D,28D"), OPTION_2("2.479=UL call+1.5GB/D,56D"),
+        OPTION_3("3.299=UL call+1.5GB/D28D"), OPTION_4("4.549=UL call+25GB/D,56D"), OPTION_5("9.Back"),
+        OPTION_6("0.Exit");
+
+        private final String text;
+
+        NewOffers(final String text) {
+            this.text = text;
         }
-    }
-}
-class NewOfferEnglish
-{
-    Scanner sc=new Scanner(System.in);
-    English english=new English();
-    void selectoffer()
-    {
-        System.out.println("Enter Your Option:\n1.1000: UL International Calls,5 days \n2.1700: UL International Calls,15 days");
-        System.out.println("9.Back\n0.Exit");
-        int book=sc.nextInt();
-        switch (book) {
-            case 1 ->
-                    {
-                        ChatBot.chatbot.push("1000: UL International Calls,5 days");
-                        System.out.println("Recharged Successfully");
-                        System.out.println("Enter Your Option:\n9.Back\n0.Exit");
-                        int opt=sc.nextInt();
-                        if(opt==9) {
-                            ChatBot.chatbot.pop();
-                            english.selectEnglish();
-                        }
-                        else
-                        {
-                            System.exit(0);
-                        }
-                    }
-            case 2 ->
-                    {
-                        ChatBot.chatbot.push("1700: UL International Calls,15 days");
-                        System.out.println("Recharged Successfully");
-                        System.out.println("Enter Your Option:\n9.Back\n0.Exit");
-                        int opt=sc.nextInt();
-                        if(opt==9) {
-                            ChatBot.chatbot.pop();
-                            english.selectEnglish();
-                        }
-                        else
-                        {
-                            System.exit(0);
-                        }
-                    }
-            case 9 -> {
-                ChatBot.chatbot.pop();
-                english.selectEnglish();
-            }
-            case 0 -> System.exit(0);
-        }
-    }
-}
-class Hindi
-{
-    Scanner sc=new Scanner(System.in);
-    Language lang=new Language();
-    void selectHindi()
-    {
-        System.out.println("Enter Your Option:\n1.Recharge\n2.Caller Tune\n3.DTH\n4.New Offer\n9.Back\n0.Exit");
-        int option=sc.nextInt();
-        switch (option) {
-            case 1 -> {
-                ChatBot.chatbot.push("Recharge");
-                RechargeHindi reh = new RechargeHindi();
-                reh.selectoffer();
-            }
-            case 2 -> {
-                ChatBot.chatbot.push("Caller_Tune");
-                CallerTuneHindi cteh=new CallerTuneHindi();
-                cteh.selectoffer();
-            }
-            case 3 -> {
-                ChatBot.chatbot.push("DTH");
-                DTHHindi dtheh=new DTHHindi();
-                dtheh.selectoffer();
-            }
-            case 4 -> {
-                ChatBot.chatbot.push("New_Offer");
-                NewOfferHindi noeh=new NewOfferHindi();
-                noeh.selectoffer();
-            }
-            case 9 -> {
-                ChatBot.chatbot.pop();
-                lang.selectLanguage();
-            }
-            case 0 -> System.exit(0);
-        }
-    }
-}
-class RechargeHindi
-{
-    Scanner sc=new Scanner(System.in);
-    Hindi hindi=new Hindi();
-    void selectoffer()
-    {
-        System.out.println("apana vikalp darj karen:\n1.179:2GB+1GB/Day+UL,28 days\n2.50TT,28 days\n3.399:1.5GB/Day+UL,56 days");
-        System.out.println("4.239:1.5GB/Day+UL,28 days\n9.vaapas\n0.baahar jaen");
-        int option=sc.nextInt();
-        switch (option) {
-            case 1 ->
-                    {
-                        ChatBot.chatbot.push("179:2GB+1GB/Day+UL,28 days");
-                        System.out.println("Recharged Successfully");
-                        System.out.println("Enter Your Option:\n9.Back\n0.Exit");
-                        int opt=sc.nextInt();
-                        if(opt==9) {
-                            ChatBot.chatbot.pop();
-                            hindi.selectHindi();
-                        }
-                        else
-                        {
-                            System.exit(0);
-                        }
-                    }
-            case 2 ->
-                    {
-                        ChatBot.chatbot.push("50TT,28 days");
-                        System.out.println("Recharged Successfully");
-                        System.out.println("Enter Your Option:\n9.Back\n0.Exit");
-                        int opt=sc.nextInt();
-                        if(opt==9) {
-                            ChatBot.chatbot.pop();
-                            hindi.selectHindi();
-                        }
-                        else
-                        {
-                            System.exit(0);
-                        }
-                    }
-            case 3 ->
-                    {
-                        ChatBot.chatbot.push("399:1.5GB/Day+UL,56 days");
-                        System.out.println("Recharged Successfully");
-                        System.out.println("Enter Your Option:\n9.Back\n0.Exit");
-                        int opt=sc.nextInt();
-                        if(opt==9) {
-                            ChatBot.chatbot.pop();
-                            hindi.selectHindi();
-                        }
-                        else
-                        {
-                            System.exit(0);
-                        }
-                    }
-            case 4 ->
-                    {
-                        ChatBot.chatbot.push("239:1.5GB/Day+UL,28 days");
-                        System.out.println("Recharged Successfully");
-                        System.out.println("Enter Your Option:\n9.Back\n0.Exit");
-                        int opt=sc.nextInt();
-                        if(opt==9) {
-                            ChatBot.chatbot.pop();
-                            hindi.selectHindi();
-                        }
-                        else
-                        {
-                            System.exit(0);
-                        }
-                    }
-            case 9 -> {
-                ChatBot.chatbot.pop();
-                hindi.selectHindi();
-            }
-            case 0 -> System.exit(0);
-        }
-    }
-}
-class CallerTuneHindi
-{
-    Scanner sc=new Scanner(System.in);
-    Hindi hindi=new Hindi();
-    void selectoffer()
-    {
-        System.out.println("apana vikalp darj karen:\n1.Dheere Dheere Se Meri Zindagi Mein Aana(Aashiqui)\n2.Tum Hi Ho(Aashiqui 2)");
-        System.out.println("3.Galliyan(Ek Villain)\n4.Chaka Chak(Atrangi Re)\n9.vaapas\n0.baahar jaen");
-        int option=sc.nextInt();
-        switch (option) {
-            case 1 ->
-                    {
-                        ChatBot.chatbot.push("Dheere Dheere Se Meri Zindagi Mein Aana(Aashiqui)");
-                        System.out.println("Caller Tune added Successfully");
-                        System.out.println("Enter Your Option:\n9.Back\n0.Exit");
-                        int opt=sc.nextInt();
-                        if(opt==9) {
-                            ChatBot.chatbot.pop();
-                            hindi.selectHindi();
-                        }
-                        else
-                        {
-                            System.exit(0);
-                        }
-                    }
-            case 2 ->
-                    {
-                        ChatBot.chatbot.push("Tum Hi Ho(Aashiqui 2)");
-                        System.out.println("Caller Tune added Successfully");
-                        System.out.println("Enter Your Option:\n9.Back\n0.Exit");
-                        int opt=sc.nextInt();
-                        if(opt==9) {
-                            ChatBot.chatbot.pop();
-                            hindi.selectHindi();
-                        }
-                        else
-                        {
-                            System.exit(0);
-                        }
-                    }
-            case 3 ->
-                    {
-                        ChatBot.chatbot.push("Galliyan(Ek Villain)");
-                        System.out.println("Caller Tune added Successfully");
-                        System.out.println("Enter Your Option:\n9.Back\n0.Exit");
-                        int opt=sc.nextInt();
-                        if(opt==9) {
-                            ChatBot.chatbot.pop();
-                            hindi.selectHindi();
-                        }
-                        else
-                        {
-                            System.exit(0);
-                        }
-                    }
-            case 4 ->
-                    {
-                        ChatBot.chatbot.push("Chaka Chak(Atrangi Re)");
-                        System.out.println("Caller Tune added Successfully");
-                        System.out.println("Enter Your Option:\n9.Back\n0.Exit");
-                        int opt=sc.nextInt();
-                        if(opt==9) {
-                            ChatBot.chatbot.pop();
-                            hindi.selectHindi();
-                        }
-                        else
-                        {
-                            System.exit(0);
-                        }
-                    }
-            case 9 -> {
-                ChatBot.chatbot.pop();
-                hindi.selectHindi();
-            }
-            case 0 -> System.exit(0);
-        }
-    }
-}
-class DTHHindi
-{
-    Scanner sc=new Scanner(System.in);
-    Hindi hindi=new Hindi();
-    void selectoffer()
-    {
-        System.out.println("apana vikalp darj karen:\n1.200/Month,keval Hindi chainalon\n2.500/Month,sab chainalon");
-        System.out.println("3.100/Month,keval sangeet chainalon\n4.250/Month,Hindi tatha English chainalon\n9.vaapas\n0.baahar jaen");
-        int option=sc.nextInt();
-        switch (option) {
-            case 1 ->
-                    {
-                        ChatBot.chatbot.push("200/Month,keval Hindi chainalon");
-                        System.out.println("Recharged Successfully");
-                        System.out.println("Enter Your Option:\n9.Back\n0.Exit");
-                        int opt=sc.nextInt();
-                        if(opt==9) {
-                            ChatBot.chatbot.pop();
-                            hindi.selectHindi();
-                        }
-                        else
-                        {
-                            System.exit(0);
-                        }
-                    }
-            case 2 ->
-                    {
-                        ChatBot.chatbot.push("500/Month,sab chainalon");
-                        System.out.println("Recharged Successfully");
-                        System.out.println("Enter Your Option:\n9.Back\n0.Exit");
-                        int opt=sc.nextInt();
-                        if(opt==9) {
-                            ChatBot.chatbot.pop();
-                            hindi.selectHindi();
-                        }
-                        else
-                        {
-                            System.exit(0);
-                        }
-                    }
-            case 3 ->
-                    {
-                        ChatBot.chatbot.push("100/Month,keval sangeet chainalon");
-                        System.out.println("Recharged Successfully");
-                        System.out.println("Enter Your Option:\n9.Back\n0.Exit");
-                        int opt=sc.nextInt();
-                        if(opt==9) {
-                            ChatBot.chatbot.pop();
-                            hindi.selectHindi();
-                        }
-                        else
-                        {
-                            System.exit(0);
-                        }
-                    }
-            case 4 ->
-                    {
-                        ChatBot.chatbot.push("250/Month,Hindi tatha English chainalon");
-                        System.out.println("Recharged Successfully");
-                        System.out.println("Enter Your Option:\n9.Back\n0.Exit");
-                        int opt=sc.nextInt();
-                        if(opt==9) {
-                            ChatBot.chatbot.pop();
-                            hindi.selectHindi();
-                        }
-                        else
-                        {
-                            System.exit(0);
-                        }
-                    }
-            case 9 -> {
-                ChatBot.chatbot.pop();
-                hindi.selectHindi();
-            }
-            case 0 -> System.exit(0);
-        }
-    }
-}
-class NewOfferHindi
-{
-    Scanner sc=new Scanner(System.in);
-    Hindi hindi=new Hindi();
-    void selectoffer()
-    {
-        System.out.println("apana vikalp darj karen\n1.1000: UL antararaashtreey kol,5 days \n2.1700: UL antararaashtreey kol,15 days");
-        System.out.println("9.vaapas\n0.baahar jaen");
-        int book=sc.nextInt();
-        switch (book) {
-            case 1 ->
-                    {
-                        ChatBot.chatbot.push("1000: UL antararaashtreey kol,5 days");
-                        System.out.println("Recharged Successfully");
-                        System.out.println("Enter Your Option:\n9.Back\n0.Exit");
-                        int opt=sc.nextInt();
-                        if(opt==9) {
-                            ChatBot.chatbot.pop();
-                            hindi.selectHindi();
-                        }
-                        else
-                        {
-                            System.exit(0);
-                        }
-                    }
-            case 2 ->
-                    {
-                        ChatBot.chatbot.push("1700: UL antararaashtreey kol,15 days");
-                        System.out.println("Recharged Successfully");
-                        System.out.println("Enter Your Option:\n9.Back\n0.Exit");
-                        int opt=sc.nextInt();
-                        if(opt==9) {
-                            ChatBot.chatbot.pop();
-                            hindi.selectHindi();
-                        }
-                        else
-                        {
-                            System.exit(0);
-                        }
-                    }
-            case 9 -> {
-                ChatBot.chatbot.pop();
-                hindi.selectHindi();
-            }
-            case 0 -> System.exit(0);
+
+        public String toString() {
+            return text;
         }
     }
 }
